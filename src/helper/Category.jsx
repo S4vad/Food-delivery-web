@@ -44,4 +44,4 @@ import { GiHamburger } from "react-icons/gi";
 
 ]
 
-export default Categories
+export default Categories;
