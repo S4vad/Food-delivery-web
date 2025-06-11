@@ -2,7 +2,7 @@ import React from "react";
 import { GiChickenOven } from "react-icons/gi";
 import { LuLeafyGreen } from "react-icons/lu";
 
-export const Card = ({name,image,id,price,type}) => {
+export const Card = ({name,image,price,type}) => {
   return (
     <div className="w-[280px] h-[400px] bg-white p-3 rounded-lg flex flex-col gap-3 shadow-lg hover:border-2 border-green-300 cursor-pointer ">
       <div className="w-full h-[60%] overflow-hidden rounded-lg">
