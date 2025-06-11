@@ -5,11 +5,13 @@ import { Card } from "../components/Card";
 import { food_items } from "../helper/food";
 import { IoMdClose } from "react-icons/io";
 import { CartCard } from "../components/CartCard";
+import { useSelector } from "react-redux";
 
 export const Home = () => {
   const [items, setItems] = useState(food_items);
   const [searchQuery, setSearchQuery] = useState("");
   const [showCart, setShowCart] = useState(false);
+  const cartItems = useSelector((state) => state.cart);
 
   const search = () => {
     const query = searchQuery.toLowerCase();
@@ -72,11 +74,11 @@ export const Home = () => {
         )}
       </div>
       {/* //cart */}
-  
+
       <div
         className={`bg-white h-full fixed right-0 top-0 w-full sm:w-[60%] md:w-[40%] lg:w-[30%] transition-transform duration-500 transform ${
           showCart ? "translate-x-0" : "translate-x-full"
-        } p-6 shadow-xl z-50`}
+        } p-6 shadow-xl z-50 overflow-y-scroll`} 
       >
         <header className="text-green-500 flex justify-between items-center w-full  text-xl">
           <span>Cart Items</span>
@@ -86,7 +88,15 @@ export const Home = () => {
           />
         </header>
         <div>
-          <CartCard />
+          {cartItems.map((item) => (
+            <CartCard
+              key={item.id}
+              id={item.id}
+              name={item.name}
+              price={item.price}
+              image={item.image}
+            />
+          ))}
         </div>
       </div>
     </div>

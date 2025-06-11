@@ -1,8 +1,11 @@
 import { MdFastfood } from "react-icons/md";
 import { IoSearch } from "react-icons/io5";
 import { LuShoppingBag } from "react-icons/lu";
+import {  useSelector } from "react-redux";
 
 export const Nav = ({searchQuery,setSearchQuery,setShowCart}) => {
+  const cartItems=useSelector(state=>state.cart)
+  console.log('the cart',cartItems)
   return (
     <div className="w-full h-[100px]  flex justify-between items-center px-5 md:px-8">
       <div className="w-[60px] h-[60px] bg-white flex justify-center items-center rounded shadow-md">
@@ -20,7 +23,7 @@ export const Nav = ({searchQuery,setSearchQuery,setShowCart}) => {
       </form>
       <div className="w-[60px] h-[60px] bg-white flex justify-center items-center rounded shadow-md relative cursor-pointer" onClick={()=>setShowCart(true)}>
         <span className="absolute top-0 right-2 text-green-500 font-bold text-[18px]">
-          0
+          {cartItems.length}
         </span>
         <LuShoppingBag className="w-[30px] h-[30px] text-green-500 " />
       </div>
