@@ -1,10 +1,12 @@
 import React from "react";
 import { Nav } from "../components/Nav";
 import Categories from "../helper/Category";
+import { Card } from "../components/Card";
+import { food_items } from "../helper/food";
 
 export const Home = () => {
   return (
-    <div className="bg-slate-200 w-full min-h-screen space-y-4">
+    <div className="bg-slate-200 w-full min-h-screen">
       <Nav />
       <div className="flex flex-wrap justify-center gap-6 w-[100%] items-center">
         {Categories.map((item) => (
@@ -14,6 +16,18 @@ export const Home = () => {
           </div>
         ))}
       </div>
+      <div className="w-full flex flex-wrap gap-5 px-5 justify-center items-center pt-8 pb-8">
+        {food_items.map((item) => (
+          <Card
+            name={item.food_name}
+            image={item.food_image}
+            price={item.price}
+            id={item.id}
+            type={item.food_type}
+          />
+        ))}
+      </div>
+      =
     </div>
   );
 };
