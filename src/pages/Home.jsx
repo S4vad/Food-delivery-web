@@ -36,6 +36,15 @@ export const Home = () => {
       setItems(data);
     }
   };
+
+  let subtotal = cartItems.reduce(
+    (total, item) => total + item.qty * item.price,
+    0
+  );
+  let deliverFee = 20;
+  let taxes = (subtotal * 0.5) / 100;
+  let total = Math.floor(subtotal + deliverFee + taxes);
+
   return (
     <div className="bg-slate-200 w-full min-h-screen">
       <Nav
@@ -78,7 +87,7 @@ export const Home = () => {
       <div
         className={`bg-white h-full fixed right-0 top-0 w-full sm:w-[60%] md:w-[40%] lg:w-[30%] transition-transform duration-500 transform ${
           showCart ? "translate-x-0" : "translate-x-full"
-        } p-6 shadow-xl z-50 overflow-y-scroll`} 
+        } p-6 shadow-xl z-50 overflow-y-auto flex flex-col items-center`}
       >
         <header className="text-green-500 flex justify-between items-center w-full  text-xl">
           <span>Cart Items</span>
@@ -87,7 +96,8 @@ export const Home = () => {
             className="cursor-pointer hover:text-green-700  "
           />
         </header>
-        <div>
+        
+        <div className="w-full mt-4 flex flex-col gap-2 ">
           {cartItems.map((item) => (
             <CartCard
               key={item.id}
@@ -95,9 +105,44 @@ export const Home = () => {
               name={item.name}
               price={item.price}
               image={item.image}
+              qty={item.qty}
             />
           ))}
         </div>
+        <div className="w-full border-t-2 border-b-2 border-gray-400 mt-7 flex flex-col gap-2 p-6">
+          <div className="w-full flex justify-between items-center">
+            <span className="font-semibold text-lg text-gray-600">
+              Subtotal
+            </span>
+            <span className="text-green-400 font-semibold text-lg">
+              Rs-{subtotal}
+            </span>
+          </div>
+          <div className="w-full flex justify-between items-center">
+            <span className="font-semibold text-lg text-gray-600">
+              Delivery Fee
+            </span>
+            <span className="text-green-400 font-semibold text-lg">
+              Rs-{deliverFee}
+            </span>
+          </div>
+          <div className="w-full flex justify-between items-center">
+            <span className="font-semibold text-lg text-gray-600">Taxes</span>
+            <span className="text-green-400 font-semibold text-lg">
+              Rs-{taxes}
+            </span>
+          </div>
+        </div>
+
+        <div className="w-full flex justify-between items-center p-4">
+          <span className="font-semibold text-xl text-gray-600">Total</span>
+          <span className="text-green-400 font-semibold text-xl">
+            Rs-{total}
+          </span>
+        </div>
+        <button className="w-[80%] p-3  rounded-lg bg-green-500 text-white hover:bg-green-400 transition-all duration-300">
+          Place Order
+        </button>
       </div>
     </div>
   );
